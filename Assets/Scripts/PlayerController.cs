@@ -5,18 +5,17 @@ using System.Collections;
 
 public class PlayerController : MonoBehaviour {
 
-	//public float scaleX = 0.1f;
-	//public float scaleY = 0.1f;
-
 	private float horizontal;
 	private float vertical;
 
 	private Rigidbody2D rb;
-	//private Vector2 userInput;
+	private Vector2 userInput;
 
-	//public float movementForce = 1f;
+	public float movementForce = 1f;
 	public float movementSpeed = 5f;
 	public float rotationSpeed = 100f;
+
+	private float level = 1;
 
 	void Start () {
 		// retrieve rigidbody for player
@@ -50,11 +49,21 @@ public class PlayerController : MonoBehaviour {
 	void OnCollisionEnter2D(Collision2D collision) {
 		Debug.Log("Collided with "+ collision.collider.name);
 
+		SoundController.OnHitWall ();
+
 		// check if the collider is an obstacle
 		// if so destroy it
+		if (collision.collider.CompareTag (Tags.Points)) {
+			GameObject.Destroy (collision.collider.gameObject);
+			Debug.Log ("Aphid points");
+			SoundController.OnPowerUp ();
+			// add points
+		}
+
 		if (collision.collider.CompareTag (Tags.Obstacle)) {
 			GameObject.Destroy (collision.collider.gameObject);
-			Debug.Log ("Leaf destroyed!");
+			Debug.Log ("You were eaten");
+			SoundController.OnEatenBySpider ();
 		}
 	}
 
