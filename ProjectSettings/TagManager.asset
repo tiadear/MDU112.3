@@ -7,6 +7,7 @@ TagManager:
   - Wall
   - Obstacle
   - Points
+  - Evil
   layers:
   - Default
   - TransparentFX

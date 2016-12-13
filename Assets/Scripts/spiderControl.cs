@@ -2,24 +2,26 @@
 using System.Collections;
 
 public class spiderControl : MonoBehaviour {
-
-	private float horizontal = 1f;
-	private float vertical = 1f;
-	public float speed = 40f;
+	
+	private int pos;
+	public float speed = 2f;
+	public Transform[] points; 
 
 	// Use this for initialization
 	void Start () {
-	
+		transform.position = points[0].position;
+		pos = 0;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 
-		Vector3 positionOffset = -transform.right * vertical * 5 * Time.fixedDeltaTime;
-		transform.position = transform.position + positionOffset;
-
-		Vector3 rotationDelta = new Vector3(0, 0, -horizontal * speed * Time.deltaTime);
-		transform.Rotate (rotationDelta);
-
+		if (transform.position == points[pos].position) {
+			++pos;
+		}
+		if (pos >= points.Length) {
+			pos = 0;
+		}
+		transform.position = Vector3.MoveTowards (transform.position, points[pos].position, speed * Time.deltaTime);
 	}
 }
