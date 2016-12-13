@@ -16,7 +16,8 @@ public class PlayerController : MonoBehaviour {
 	// INITIAL POINTS
 	private float points;
 	private float pointsGained;
-	private float level = 1f;
+	private float currentlevel;
+	private string currentscene;
 
 
 	// MOVEMENT VARIABLES
@@ -29,6 +30,9 @@ public class PlayerController : MonoBehaviour {
 	public float movementForce = 1f;
 	public float rotationSpeed = 100f;
 
+
+	public GameObject spider;
+	private LevelLoader ll;
 	private int hits;
 
 
@@ -81,14 +85,25 @@ public class PlayerController : MonoBehaviour {
 
 	// return current level
 	public float newPoints(float XP, float currentLevel, float XPgained){
+		
 		//if your current points is higher than those required to level up
 		if (XPgained >= (pointsReqdForNextLevel(XP))) {
+			
 			float newlevel = ++currentLevel;
 			Debug.Log ("You have moved up a level!!!");
 			Debug.Log ("You are now on level " + newlevel);
 
+			// send new level data to spidey control
+			spiderControl spiderControl = spider.GetComponent<spiderControl>();
+			spiderControl.setSpideySpeed (newlevel);
+
+			// restart the scene
+			string strlevel = newlevel.ToString();
+			ll.LoadLevel (strlevel);
 			return newlevel;
-		} else {
+		} 
+
+		else {
 			return currentLevel;
 		}
 	}
@@ -103,9 +118,31 @@ public class PlayerController : MonoBehaviour {
 	void Start () {
 		// retrieve rigidbody for player
 		rb = gameObject.GetComponent<Rigidbody2D>();
-		points = 0;
+
 		strength = getStrength(points);
 		hits = 0;
+
+		// get the levelloader script
+		ll = FindObjectOfType<LevelLoader>();
+
+		//return current level
+		currentscene = ll.CurrentLevel(); // 1, 2, 3, etc
+		currentlevel = float.Parse(currentscene); // convert to float
+
+		// set points for that level
+		if (currentlevel == 1) {
+			points = L1;
+		} else if (currentlevel == 2) {
+			points = L2;
+		} else if (currentlevel == 3) {
+			points = L3;
+		} else if (currentlevel == 4) {
+			points = L4;
+		}
+
+		// send new level data to spidey control
+		spiderControl spiderControl = spider.GetComponent<spiderControl>();
+		spiderControl.setSpideySpeed (currentlevel);
 	}
 
 	void Update () {
@@ -164,8 +201,7 @@ public class PlayerController : MonoBehaviour {
 
 			// points gained
 			pointsGained = 100;
-			// get current level
-			level = newPoints (points, level, pointsGained);
+
 			// add new points on
 			points = points + pointsGained;
 			Debug.Log ("You now have " + points + " points");
@@ -183,10 +219,12 @@ public class PlayerController : MonoBehaviour {
 				//you died
 				Debug.Log ("You were eaten");
 				SoundController.OnEatenBySpider ();
+
 				points = (points + pointsToLeveLUp) - 500;
 				Debug.Log ("You now have " + points + " points");
 
-				Application.LoadLevel(Application.loadedLevel);
+				LevelLoader loadLevel = GetComponent<LevelLoader>();
+				loadLevel.LoadLevel (currentscene);
 			} 
 
 			else {
@@ -222,7 +260,8 @@ public class PlayerController : MonoBehaviour {
 					points = (points + pointsToLeveLUp) - 500;
 					Debug.Log ("You now have " + points + " points");
 
-					Application.LoadLevel(Application.loadedLevel);
+					LevelLoader loadLevel = GetComponent<LevelLoader>();
+					loadLevel.LoadLevel (currentscene);
 				}
 			}
 		}

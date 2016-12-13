@@ -694,6 +694,14 @@ Prefab:
       propertyPath: speed
       value: 0.01
       objectReference: {fileID: 0}
+    - target: {fileID: 4000011457305446, guid: 6bebabebad7973c4eaff673c3f3aee45, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000011457305446, guid: 6bebabebad7973c4eaff673c3f3aee45, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 50000012016678898, guid: 6bebabebad7973c4eaff673c3f3aee45, type: 2}
     - {fileID: 114000011597000788, guid: 6bebabebad7973c4eaff673c3f3aee45, type: 2}
@@ -1721,6 +1729,7 @@ GameObject:
   - 4: {fileID: 1773368976}
   - 114: {fileID: 1773368974}
   - 50: {fileID: 1773368975}
+  - 114: {fileID: 1773368977}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1741,6 +1750,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementForce: 1
   rotationSpeed: 100
+  spider: {fileID: 1823691192}
   agility: 0
   strength: 0
 --- !u!50 &1773368975
@@ -1774,6 +1784,17 @@ Transform:
   - {fileID: 313716116}
   m_Father: {fileID: 0}
   m_RootOrder: 2
+--- !u!114 &1773368977
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1773368973}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0c02f3ba04667c48afa936f53f9756a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1812792391
 Prefab:
   m_ObjectHideFlags: 0
@@ -1895,7 +1916,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e18a202b94a84d43aa962b1360e084b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
   points:
   - {fileID: 113162470}
   - {fileID: 1011074695}
