@@ -32,8 +32,8 @@ public class PlayerController : MonoBehaviour {
 
 
 	public GameObject spider;
+	private float spideyHealth;
 	private LevelLoader ll;
-	private int hits;
 
 
 	// STATS
@@ -50,10 +50,10 @@ public class PlayerController : MonoBehaviour {
 
 	// strength grows with each level
 	public float getStrength (float XP) {
-		if (XP < L2) { return 20f; } // on level 1
-		else if (XP >= L2 && (XP < L3)) { return 40f; } // on level 2
-		else if (XP >= L3 && (XP < L4)) { return 60f; } // on level 3
-		else { return 80f; } // on level 4
+		if (XP < L2) { return 40f; } // on level 1
+		else if (XP >= L2 && (XP < L3)) { return 60f; } // on level 2
+		else if (XP >= L3 && (XP < L4)) { return 80f; } // on level 3
+		else { return 1000f; } // on level 4
 	}
 
 
@@ -85,22 +85,25 @@ public class PlayerController : MonoBehaviour {
 
 	// return current level
 	public float newPoints(float XP, float currentLevel, float XPgained){
-		
+
 		//if your current points is higher than those required to level up
 		if (XPgained >= (pointsReqdForNextLevel(XP))) {
-			
+
+			// get the next level
 			float newlevel = ++currentLevel;
-			Debug.Log ("You have moved up a level!!!");
-			Debug.Log ("You are now on level " + newlevel);
 
-			// send new level data to spidey control
-			spiderControl spiderControl = spider.GetComponent<spiderControl>();
-			spiderControl.setSpideySpeed (newlevel);
-
-			// restart the scene
-			string strlevel = newlevel.ToString();
-			ll.LoadLevel (strlevel);
-			return newlevel;
+			// what to do if this is the final level
+			if (newlevel == 4) {
+				StartCoroutine(ll.LoadLevel ("EndGame"));
+				return newlevel;
+			}
+			else {
+				// start next scene
+				StartCoroutine(UIManager.Instance.NewLevel(newlevel));
+				string strlevel = newlevel.ToString();
+				StartCoroutine(ll.LoadLevel (strlevel));
+				return newlevel;
+			}
 		} 
 
 		else {
@@ -119,9 +122,6 @@ public class PlayerController : MonoBehaviour {
 		// retrieve rigidbody for player
 		rb = gameObject.GetComponent<Rigidbody2D>();
 
-		strength = getStrength(points);
-		hits = 0;
-
 		// get the levelloader script
 		ll = FindObjectOfType<LevelLoader>();
 
@@ -130,13 +130,34 @@ public class PlayerController : MonoBehaviour {
 		currentlevel = float.Parse(currentscene); // convert to float
 
 		// set points for that level
+		// get the strength value for that level
+		// update the points on the UI for that level
+		// update the strength on the UI for that level
 		if (currentlevel == 1) {
 			points = L1;
-		} else if (currentlevel == 2) {
+			strength = getStrength(points);
+			UIManager.Instance.UpdateHitCount(points);
+			UIManager.Instance.UpdateStrength(strength);
+		} 
+
+		else if (currentlevel == 2) {
+			transform.localScale += new Vector3(0.3f, 0.3f, 0);
 			points = L2;
-		} else if (currentlevel == 3) {
+			UIManager.Instance.UpdateHitCount(points);
+			strength = getStrength(points);
+			UIManager.Instance.UpdateStrength(strength);
+		} 
+
+		else if (currentlevel == 3) {
+			transform.localScale += new Vector3(1f, 1f, 0);
 			points = L3;
-		} else if (currentlevel == 4) {
+			UIManager.Instance.UpdateHitCount(points);
+			spideyHealth = 1000f;
+			strength = getStrength(points);
+			UIManager.Instance.UpdateStrength(strength);
+		} 
+
+		else if (currentlevel == 4) {
 			points = L4;
 		}
 
@@ -145,25 +166,22 @@ public class PlayerController : MonoBehaviour {
 		spiderControl.setSpideySpeed (currentlevel);
 	}
 
+
+
+
 	void Update () {
 
 		// get the axes
 		horizontal = Input.GetAxis ("Horizontal");
 		vertical = Input.GetAxis ("Vertical");
-
-		// store axes in the user input variable
-		//userInput = new Vector2 (horizontal, vertical);
 	}
-
-
-
 
 
 
 
 	void FixedUpdate() {
 
-		// speed and damage are based on agility and strength
+		// speed based on agility which goes up with each level
 		float movementSpeed = getAgility(points) * 0.5f;
 
 		// move the ladybug
@@ -178,15 +196,8 @@ public class PlayerController : MonoBehaviour {
 
 
 
-
-
-
-
-
-
 	void OnCollisionEnter2D(Collision2D collision) {
-		float damage = getStrength(points) * 0.8f;
-
+		float damage = getStrength(points) * 1.2f;
 
 		// if the bug hits a wall or leaf - make the sound
 		if (collision.collider.CompareTag (Tags.Wall)) {
@@ -202,9 +213,12 @@ public class PlayerController : MonoBehaviour {
 			// points gained
 			pointsGained = 100;
 
+			//level
+			float level = newPoints(points, currentlevel, pointsGained);
+
 			// add new points on
 			points = points + pointsGained;
-			Debug.Log ("You now have " + points + " points");
+			UIManager.Instance.UpdateHitCount(points);
 		}
 
 		// if the bug hits a spider
@@ -213,56 +227,48 @@ public class PlayerController : MonoBehaviour {
 
 			//if you're strong enough you can battle the spider
 			// otherwise you get eaten
-
-			if (strength < 60f) {
-				Debug.Log (strength);
+			if (strength < 80f) {
 				//you died
-				Debug.Log ("You were eaten");
 				SoundController.OnEatenBySpider ();
+				StartCoroutine(UIManager.Instance.Eaten("You were eaten"));
 
+				// reset your points for that level
 				points = (points + pointsToLeveLUp) - 500;
-				Debug.Log ("You now have " + points + " points");
+				UIManager.Instance.UpdateHitCount(points);
 
-				LevelLoader loadLevel = GetComponent<LevelLoader>();
-				loadLevel.LoadLevel (currentscene);
+				// restart that scene
+				StartCoroutine(ll.LoadLevel (currentscene));
 			} 
 
 			else {
-				Debug.Log (strength);
 				// battle the spider
-				float spideyHealth = 2000f;
 				float spideyDamage = 80f;
 
-				Debug.Log ("Battle time!");
+				// update spidey health
+				spideyHealth = spideyHealth - damage;
+				StartCoroutine(UIManager.Instance.SpideyDamage(spideyHealth));
 
-				if (hits == 1) {
-					points = points - spideyDamage;
-					hits = 0;
-					Debug.Log ("You were hit");
-					Debug.Log ("You now have " + points + " points");
-				} else {
-					spideyHealth = spideyHealth - damage;
-					++hits;
-					Debug.Log ("You hit Spidey! ");
-					Debug.Log ("Spidey now has " + points);
-				}
+				// make spidey smaller
+				spider.transform.localScale -= new Vector3(0.1f, 0.1f, 1);
 
+				// if spidey's health goes below 0
+				// he died
 				if (spideyHealth <= 0) {
-					Debug.Log ("You defeated the spider");
 					GameObject.Destroy (collision.collider.gameObject);
-					points = points + 100;
-					Debug.Log ("You now have " + points + " points");
-				}
-				if (points <= (points + pointsToLeveLUp) - 500) {
-					//you died
-					Debug.Log ("You were eaten");
-					SoundController.OnEatenBySpider ();
-					points = (points + pointsToLeveLUp) - 500;
-					Debug.Log ("You now have " + points + " points");
+					SoundController.OnPowerUp ();
+					StartCoroutine(UIManager.Instance.Eaten("You destroyed the spider!"));
 
-					LevelLoader loadLevel = GetComponent<LevelLoader>();
-					loadLevel.LoadLevel (currentscene);
+					// points gained
+					pointsGained = 300;
+
+					//level
+					float level = newPoints(points, currentlevel, pointsGained);
+
+					// add new points on
+					points = points + pointsGained;
+					UIManager.Instance.UpdateHitCount(points);
 				}
+
 			}
 		}
 	}

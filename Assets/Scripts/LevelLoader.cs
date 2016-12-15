@@ -5,7 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class LevelLoader : MonoBehaviour {
 
-	public void LoadLevel (string levelName) {
+	public IEnumerator LoadLevel (string levelName) {
+		yield return new WaitForSeconds(5);
 		SceneManager.LoadScene (levelName);
 	}
 
