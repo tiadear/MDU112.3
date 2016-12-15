@@ -94,14 +94,14 @@ public class PlayerController : MonoBehaviour {
 
 			// what to do if this is the final level
 			if (newlevel == 4) {
-				StartCoroutine(ll.LoadLevel ("EndGame"));
+				ll.LoadLevel ("EndGame");
 				return newlevel;
 			}
 			else {
 				// start next scene
 				StartCoroutine(UIManager.Instance.NewLevel(newlevel));
 				string strlevel = newlevel.ToString();
-				StartCoroutine(ll.LoadLevel (strlevel));
+				StartCoroutine(ll.LoadNextLevel (strlevel));
 				return newlevel;
 			}
 		} 
@@ -237,7 +237,7 @@ public class PlayerController : MonoBehaviour {
 				UIManager.Instance.UpdateHitCount(points);
 
 				// restart that scene
-				StartCoroutine(ll.LoadLevel (currentscene));
+				StartCoroutine(ll.LoadNextLevel (currentscene));
 			} 
 
 			else {
