@@ -155,7 +155,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4000011457305446, guid: 6bebabebad7973c4eaff673c3f3aee45, type: 2}
       propertyPath: m_RootOrder
-      value: 16
+      value: 21
       objectReference: {fileID: 0}
     - target: {fileID: 1000011009640224, guid: 6bebabebad7973c4eaff673c3f3aee45, type: 2}
       propertyPath: m_TagString
@@ -438,7 +438,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4000012704806214, guid: 8837b85ace0669c46a29382eead2940b, type: 2}
       propertyPath: m_RootOrder
-      value: 12
+      value: 19
       objectReference: {fileID: 0}
     - target: {fileID: 1000012731621106, guid: 8837b85ace0669c46a29382eead2940b, type: 2}
       propertyPath: m_TagString
@@ -484,7 +484,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
@@ -572,7 +572,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4000010237951996, guid: 9be919bc656ca924dbd7cc8d2daa7237, type: 2}
       propertyPath: m_RootOrder
-      value: 14
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 4000010237951996, guid: 9be919bc656ca924dbd7cc8d2daa7237, type: 2}
       propertyPath: m_LocalScale.x
@@ -743,7 +743,7 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   m_Points:
@@ -788,6 +788,7 @@ MonoBehaviour:
   strengthDisplay: {fileID: 1282292662}
   spideyDisplay: {fileID: 1066285483}
   levelDisplay: {fileID: 949186190}
+  agilityDisplay: {fileID: 1565697847}
 --- !u!114 &457579438
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -857,6 +858,7 @@ RectTransform:
   m_Children:
   - {fileID: 1766592323}
   - {fileID: 1282292664}
+  - {fileID: 1565697846}
   - {fileID: 949186189}
   - {fileID: 1066285482}
   m_Father: {fileID: 0}
@@ -903,7 +905,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4000010237951996, guid: 9be919bc656ca924dbd7cc8d2daa7237, type: 2}
       propertyPath: m_RootOrder
-      value: 20
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 4000010237951996, guid: 9be919bc656ca924dbd7cc8d2daa7237, type: 2}
       propertyPath: m_LocalScale.x
@@ -1147,7 +1149,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4000010237951996, guid: 9be919bc656ca924dbd7cc8d2daa7237, type: 2}
       propertyPath: m_RootOrder
-      value: 7
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 4000010237951996, guid: 9be919bc656ca924dbd7cc8d2daa7237, type: 2}
       propertyPath: m_LocalScale.x
@@ -1264,7 +1266,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 457579441}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -54.5}
@@ -1348,7 +1350,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4000010237951996, guid: 9be919bc656ca924dbd7cc8d2daa7237, type: 2}
       propertyPath: m_RootOrder
-      value: 21
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 4000010237951996, guid: 9be919bc656ca924dbd7cc8d2daa7237, type: 2}
       propertyPath: m_LocalScale.x
@@ -1445,7 +1447,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4000010237951996, guid: 9be919bc656ca924dbd7cc8d2daa7237, type: 2}
       propertyPath: m_RootOrder
-      value: 11
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 4000010237951996, guid: 9be919bc656ca924dbd7cc8d2daa7237, type: 2}
       propertyPath: m_LocalScale.x
@@ -1580,7 +1582,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 457579441}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -38}
@@ -1637,6 +1639,7 @@ GameObject:
   - 92: {fileID: 1072612984}
   - 124: {fileID: 1072612983}
   - 81: {fileID: 1072612982}
+  - 82: {fileID: 1072612987}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1712,6 +1715,80 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!82 &1072612987
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1072612981}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 7b57d271f4700244fbced26fe2a75125, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 0.236
+  m_Pitch: 1.05
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!1001 &1226588638
 Prefab:
   m_ObjectHideFlags: 0
@@ -1869,7 +1946,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4000010237951996, guid: 9be919bc656ca924dbd7cc8d2daa7237, type: 2}
       propertyPath: m_RootOrder
-      value: 17
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 4000010237951996, guid: 9be919bc656ca924dbd7cc8d2daa7237, type: 2}
       propertyPath: m_LocalScale.x
@@ -2146,7 +2223,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4000012704806214, guid: 8837b85ace0669c46a29382eead2940b, type: 2}
       propertyPath: m_RootOrder
-      value: 19
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 1000012731621106, guid: 8837b85ace0669c46a29382eead2940b, type: 2}
       propertyPath: m_TagString
@@ -2188,7 +2265,7 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   m_Points:
@@ -2199,6 +2276,80 @@ PolygonCollider2D:
       - {x: 0.13, y: -0.08}
       - {x: 0.14999999, y: -0.03}
       - {x: 0.14999999, y: 0.06}
+--- !u!1 &1565697845
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 224: {fileID: 1565697846}
+  - 222: {fileID: 1565697848}
+  - 114: {fileID: 1565697847}
+  m_Layer: 5
+  m_Name: agilityDisplay
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1565697846
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1565697845}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 457579441}
+  m_RootOrder: 2
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -210, y: 190}
+  m_SizeDelta: {x: 160, y: 30}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1565697847
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1565697845}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 20
+    m_FontStyle: 1
+    m_BestFit: 0
+    m_MinSize: 2
+    m_MaxSize: 40
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: Agility
+--- !u!222 &1565697848
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1565697845}
 --- !u!1 &1647350566
 GameObject:
   m_ObjectHideFlags: 0
@@ -2413,7 +2564,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4000012704806214, guid: 8837b85ace0669c46a29382eead2940b, type: 2}
       propertyPath: m_RootOrder
-      value: 8
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 1000012731621106, guid: 8837b85ace0669c46a29382eead2940b, type: 2}
       propertyPath: m_TagString
@@ -2459,7 +2610,7 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   m_Points:
@@ -2507,7 +2658,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4000012704806214, guid: 8837b85ace0669c46a29382eead2940b, type: 2}
       propertyPath: m_RootOrder
-      value: 15
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 1000012731621106, guid: 8837b85ace0669c46a29382eead2940b, type: 2}
       propertyPath: m_TagString
@@ -2553,7 +2704,7 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   m_Points:
@@ -2601,7 +2752,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4000010237951996, guid: 9be919bc656ca924dbd7cc8d2daa7237, type: 2}
       propertyPath: m_RootOrder
-      value: 9
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 4000010237951996, guid: 9be919bc656ca924dbd7cc8d2daa7237, type: 2}
       propertyPath: m_LocalScale.x

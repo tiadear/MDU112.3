@@ -14,6 +14,7 @@ public class UIManager : MonoBehaviour {
 	public Text strengthDisplay;
 	public Text spideyDisplay;
 	public Text levelDisplay;
+	public Text agilityDisplay;
 
 	public void UpdateHitCount(float points) {
 		pointsDisplay.text = "Points: " + points;
@@ -21,6 +22,10 @@ public class UIManager : MonoBehaviour {
 
 	public void UpdateStrength(float strength) {
 		strengthDisplay.text = "Strength: " + strength;
+	}
+
+	public void UpdateAgility(float agility) {
+		agilityDisplay.text = "Agility: " + agility;
 	}
 
 

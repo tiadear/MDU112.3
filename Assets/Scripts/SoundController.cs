@@ -41,4 +41,5 @@ public class SoundController : MonoBehaviour {
 		AudioClip clip = Instance.PowerUp[0];
 		Instance.PlaySound (Instance.SFX, clip);
 	}
+
 }

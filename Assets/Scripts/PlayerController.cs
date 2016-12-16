@@ -135,31 +135,31 @@ public class PlayerController : MonoBehaviour {
 		// update the strength on the UI for that level
 		if (currentlevel == 1) {
 			points = L1;
-			strength = getStrength(points);
-			UIManager.Instance.UpdateHitCount(points);
-			UIManager.Instance.UpdateStrength(strength);
+			strength = getStrength (points);
+			UIManager.Instance.UpdateHitCount (points);
+			UIManager.Instance.UpdateStrength (strength);
+			agility = getAgility (points);
+			UIManager.Instance.UpdateAgility (agility);
 		} 
-
 		else if (currentlevel == 2) {
-			transform.localScale += new Vector3(0.3f, 0.3f, 0);
+			transform.localScale += new Vector3 (0.3f, 0.3f, 0);
 			points = L2;
-			UIManager.Instance.UpdateHitCount(points);
-			strength = getStrength(points);
-			UIManager.Instance.UpdateStrength(strength);
+			UIManager.Instance.UpdateHitCount (points);
+			strength = getStrength (points);
+			UIManager.Instance.UpdateStrength (strength);
+			agility = getAgility (points);
+			UIManager.Instance.UpdateAgility (agility);
 		} 
-
 		else if (currentlevel == 3) {
-			transform.localScale += new Vector3(1f, 1f, 0);
+			transform.localScale += new Vector3 (1f, 1f, 0);
 			points = L3;
-			UIManager.Instance.UpdateHitCount(points);
+			UIManager.Instance.UpdateHitCount (points);
 			spideyHealth = 1000f;
-			strength = getStrength(points);
-			UIManager.Instance.UpdateStrength(strength);
+			strength = getStrength (points);
+			UIManager.Instance.UpdateStrength (strength);
+			agility = getAgility (points);
+			UIManager.Instance.UpdateAgility (agility);
 		} 
-
-		else if (currentlevel == 4) {
-			points = L4;
-		}
 
 		// send new level data to spidey control
 		spiderControl spiderControl = spider.GetComponent<spiderControl>();
@@ -204,23 +204,6 @@ public class PlayerController : MonoBehaviour {
 			SoundController.OnHitWall ();
 		}
 			
-		// if the bug hits an aphid
-		// destroy the aphid and earn points
-		if (collision.collider.CompareTag (Tags.Points)) {
-			GameObject.Destroy (collision.collider.gameObject);
-			SoundController.OnPowerUp ();
-
-			// points gained
-			pointsGained = 100;
-
-			//level
-			float level = newPoints(points, currentlevel, pointsGained);
-
-			// add new points on
-			points = points + pointsGained;
-			UIManager.Instance.UpdateHitCount(points);
-		}
-
 		// if the bug hits a spider
 		if (collision.collider.CompareTag (Tags.Obstacle))  {
 			float pointsToLeveLUp = pointsReqdForNextLevel(points);
@@ -274,7 +257,22 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void OnTriggerEnter2D (Collider2D collider) {
-		Debug.Log("Entered trigger zone "+ collider.name);
+		// if the bug hits an aphid
+		// destroy the aphid and earn points
+		if (collider.CompareTag (Tags.Points)) {
+			GameObject.Destroy (collider.gameObject);
+			SoundController.OnPowerUp ();
+
+			// points gained
+			pointsGained = 100;
+
+			//level
+			float level = newPoints(points, currentlevel, pointsGained);
+
+			// add new points on
+			points = points + pointsGained;
+			UIManager.Instance.UpdateHitCount(points);
+		}
 	}
 
 }
